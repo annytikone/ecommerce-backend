@@ -308,22 +308,6 @@ pnpm test
 ## 13) Troubleshooting
 
 * **`crypto is not defined` (Node 18)**: add the polyfill line shown in §1 or upgrade to Node 20+.
-* **`column "userId"/"orderId" does not exist`**: the DB uses snake_case (`user_id`, `order_id`). Ensure your entities have:
-
-  ```ts
-  @JoinColumn({ name: 'user_id' }) // in Order.user
-  @JoinColumn({ name: 'order_id' }) // in OrderItem.order
-  @Column({ name: 'total_amount' })
-  @Column({ name: 'unit_price' })
-  @CreateDateColumn({ name: 'created_at' })
-  ```
-
-  Rebuild after changes:
-
-  ```bash
-  rm -rf dist && pnpm run start:dev
-  ```
-* **JWT errors**: ensure `.env` has a strong `JWT_SECRET`.
 
 ---
 
@@ -333,5 +317,6 @@ pnpm test
 * Use **migrations** for schema changes.
 * Add **refresh tokens**, **rate-limiting** on login, and **audit logs** as needed.
 * Consider `typeorm-naming-strategies` with `SnakeNamingStrategy` for consistent snake_case generation.
+
 
 ---
